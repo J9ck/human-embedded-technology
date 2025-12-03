@@ -14,6 +14,7 @@ Deep learning has revolutionized biosignal analysis, enabling automatic feature 
 ```python
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 class EEGNet(nn.Module):
     """Compact CNN for EEG classification (Lawhern et al., 2018)"""

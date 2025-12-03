@@ -228,8 +228,9 @@ NVIC_SetPriority(SysTick_IRQn, 15);     // Lowest: OS tick
 void ADC_IRQHandler(void) {
     GPIO_SetBits(GPIOA, GPIO_Pin_0);  // Debug pin high
     
-    // ISR code here
-    handle_adc_interrupt();
+    // ISR code here (minimal processing)
+    uint16_t sample = ADC->DR;
+    process_sample_quickly(sample);
     
     GPIO_ResetBits(GPIOA, GPIO_Pin_0);  // Debug pin low
     // Measure pulse width on oscilloscope

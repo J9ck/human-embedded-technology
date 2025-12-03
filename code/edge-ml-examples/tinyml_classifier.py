@@ -114,10 +114,15 @@ def main():
     tflite_model = convert_to_tflite(model, X_train[:100])
     
     # Save TFLite model
-    with open('/tmp/gesture_classifier.tflite', 'wb') as f:
+    import os
+    import tempfile
+    output_dir = tempfile.gettempdir()
+    output_path = os.path.join(output_dir, 'gesture_classifier.tflite')
+    
+    with open(output_path, 'wb') as f:
         f.write(tflite_model)
     
-    print("\nTFLite model saved to /tmp/gesture_classifier.tflite")
+    print(f"\nTFLite model saved to {output_path}")
     print("Deploy this model to a microcontroller using TensorFlow Lite Micro!")
 
 

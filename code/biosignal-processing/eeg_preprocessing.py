@@ -11,7 +11,11 @@ Website: https://www.jgcks.com
 
 import numpy as np
 from scipy import signal
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    MATPLOTLIB_AVAILABLE = False
 
 
 def bandpass_filter(data, lowcut, highcut, fs, order=4):
@@ -240,8 +244,13 @@ def main():
     axes[2].grid(True)
     
     plt.tight_layout()
-    plt.savefig('/tmp/eeg_preprocessing_demo.png', dpi=150)
-    print("\nPlot saved to /tmp/eeg_preprocessing_demo.png")
+    
+    import os
+    import tempfile
+    output_dir = tempfile.gettempdir()
+    output_path = os.path.join(output_dir, 'eeg_preprocessing_demo.png')
+    plt.savefig(output_path, dpi=150)
+    print(f"\nPlot saved to {output_path}")
 
 
 if __name__ == "__main__":
